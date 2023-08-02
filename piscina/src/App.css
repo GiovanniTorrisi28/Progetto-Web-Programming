@@ -1,0 +1,33 @@
+.App{
+  position: relative;
+}
+
+.UserPhotoUpload input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+/*RecordDataCard */
+.RecordDataCard input{
+  border: none;
+}
+
+.Uneditable{
+  outline: none;
+}
+
+.AdminListGroupItem {
+  text-decoration: none;
+}
+
+.AdminInput {
+  border: none;
+  background: rgb(0,0,0,0);
+  color: white;
+}
