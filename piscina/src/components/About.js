@@ -27,7 +27,6 @@ function About() {
       <Row >
           <Col xs = {12} md = {6}>
                 <h1>About us</h1>
-                <h3>We are Aqua-fit</h3>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris egestas ligula ac dapibus blandit. Fusce venenatis justo quis neque aliquam sagittis. Nulla volutpat nisl nec neque fermentum suscipit. Aenean tincidunt velit et risus iaculis ornare. Sed cursus suscipit est vel interdum. Pellentesque vestibulum eleifend eros sit amet lacinia. Aliquam in tristique purus, a tristique dolor.
           </Col>
           <Col xs = {12} md = {6}>

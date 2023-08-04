@@ -31,3 +31,8 @@
   background: rgb(0,0,0,0);
   color: white;
 }
+
+.tab-content-dark:focus {
+  color: black; /* Imposta il colore del testo attivo su nero */
+  background-color: green; /* Imposta lo sfondo attivo su bianco */
+}

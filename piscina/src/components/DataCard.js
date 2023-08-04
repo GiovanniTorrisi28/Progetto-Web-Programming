@@ -24,7 +24,6 @@ function DataCard(){
          <Card.Body>
              <RecordDataCard label = "Name" valueType = {'text'} value = {userData.name} isEditable = {false}/>
              <RecordDataCard label = "Surname" valueType = {'text'} value = {userData.surname} isEditable = {false}/>
-             <RecordDataCard label = "Username" valueType = {'text'} value = {userData.username} isEditable = {false}/>
              <RecordDataCard label = "Email" valueType = {'email'} value =  {userData.email} isEditable = {true} url = {"updateUserData"}/>
          </Card.Body>
       </Card>

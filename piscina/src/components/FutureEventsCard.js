@@ -76,9 +76,8 @@ function FutureEventsCard () {
                  'Content-type': "application/json"
              }
         });
-        if(response.ok)
-          alert("ok");
-        else alert("failed");
+        if(!response.ok)
+           alert("Update Failed");
     }
 
     return (

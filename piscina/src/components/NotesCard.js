@@ -38,7 +38,6 @@ function NotesCard() {
         if (response.status === 500)
             alert("errore nel getNotes");
         else {
-
             setUserNotes(data);
         }
     };
@@ -64,11 +63,10 @@ function NotesCard() {
             }
         })
             .then(response => {
-                if (response.ok) {
-                    alert("successfully");
-                }
-                else
+                if (!response.ok) {
                     alert("Update failed");
+                }
+                
             });
     }
 
@@ -86,11 +84,9 @@ function NotesCard() {
             }
         })
             .then(response => {
-                if (response.ok) {
-                    alert("successfully");
-                }
-                else
+                if (!response.ok) {
                     alert("Send failed");
+                }
             });
     }
 
@@ -108,11 +104,9 @@ function NotesCard() {
         })
             .then(response => {
                 if (response.ok) {
-                    alert("successfully");
                     setShowModal(false);
                 }
-                else
-                    alert("Delete failed");
+               
             });
     }
 

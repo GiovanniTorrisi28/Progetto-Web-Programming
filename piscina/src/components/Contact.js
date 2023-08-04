@@ -61,7 +61,7 @@ function Contact() {
       <TopNavbar />
       <Container className='mt-4'>
         <CardGroup>
-          <Card style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }} border={"dark"}>
+          <Card style={{ background: "rgba(var(--bs-info-rgb),0.4)" }} border={"dark"} text = "light">
             <Card.Body>
               <Card.Title className="mb-4">
                 Our Contacts
@@ -75,7 +75,7 @@ function Contact() {
               <BsInstagram size="5vh" style={iconsStyle} /> {companyData.instagram}
             </Card.Body>
           </Card>
-          <Card style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }} border={"dark"}>
+          <Card style={{background: "rgba(var(--bs-light-rgb),0.4)" }} border={"dark"}>
             <form onSubmit={handleSubmit}>
               <Card.Body>
                 <Card.Title>

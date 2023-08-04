@@ -33,7 +33,6 @@ function AdminSubscriptions() {
             }));
             setSubscriptionsData(mappedData);
         }
-        else alert("errore nella fetch");
 
         const response2 = await fetch("http://localhost:3001/getActivitiesData");
         const data2 = await response2.json();
@@ -67,7 +66,6 @@ function AdminSubscriptions() {
             }
         });
         if (response.ok) {
-            alert("Success");
             fetchData();
         }
     }

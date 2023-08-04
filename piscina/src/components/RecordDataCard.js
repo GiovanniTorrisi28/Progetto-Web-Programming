@@ -28,8 +28,10 @@ function RecordDataCard(props) {
 
    const [recordValue, setRecordValue] = useState(props.value);
    const handleChange = (event) => {
+      if(!props.isEditable)
+         return;
       setRecordValue(event.target.value);
-      console.log(recordValue);
+      
    };
 
    useEffect(() => {
@@ -45,7 +47,7 @@ function RecordDataCard(props) {
             </Col>
             <Col md = {7}> 
                <Form.Control type = {props.valueType} size = "30" name = {props.label}
-                className= {`mb-0 ${props.isEditable ? 'Editable' : 'Uneditable'}`}  value = {recordValue} onChange={handleChange} />
+                className= {`mb-0 ${props.isEditable ? 'Editable' : 'Uneditable'}`} value = {recordValue} onChange={handleChange} />
           </Col>
           <Col md = {2}>
             { props.isEditable && (

@@ -87,7 +87,7 @@ function AdminActivities() {
             body: formData,
         });
         if (response.ok) {
-            alert("Insert successfully");
+            //alert("Insert successfully");
             setNewItem({ name: "", description: "" });
             fetchData();
         }

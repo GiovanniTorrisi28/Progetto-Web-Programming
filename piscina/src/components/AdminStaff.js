@@ -36,7 +36,7 @@ function AdminStaff() {
             }));
 
             setStaffData(mappedData);
-        } else alert("errore nel getStaffData");
+        }
     };
 
     async function edit(item) {
@@ -48,7 +48,8 @@ function AdminStaff() {
                 'Content-type': "application/json",
             },
         });
-        if (response.ok) alert("Update successfully");
+        if (!response.ok) 
+            alert("Update failed");
     }
 
     const deleteItem = async (item) => {
@@ -95,7 +96,7 @@ function AdminStaff() {
             body: formData,
         });
         if (response.ok) {
-            alert("Insert successfully");
+           // alert("Insert successfully");
             setNewItem({ name: "", surname: "", instagram: "", linkedin: "" });
             fetchData();
         }

@@ -45,8 +45,8 @@ function FutureEvents(props) {
                 'Content-type': "application/json"
             }
         });
-        if (response.ok)
-            alert("Update Successfully");
+        if (!response.ok)
+            alert("Update failed");
     };
 
     //per il modal
@@ -81,10 +81,10 @@ function FutureEvents(props) {
 
     return (
         <>
-            <Card bg = "dark" border = "primary">
+            <Card bg="dark" border="primary">
                 <Card.Body>
-                    <Card.Title className = "text-light">Eventi Futuri</Card.Title>
-                    <Table responsive variant = "dark">
+                    <Card.Title className="text-light">Eventi Futuri</Card.Title>
+                    <Table responsive variant="dark">
                         <thead>
                             <tr>
                                 <td>Name</td>
@@ -97,7 +97,7 @@ function FutureEvents(props) {
                         <tbody>
                             {futureEvents.map((item, index) => (
                                 <tr key={index}>
-                                    <td><input type='text' value={item.name} name="name" className = "AdminInput" onChange={(e) => handleChange(e, index)} /></td>
+                                    <td><input type='text' value={item.name} name="name" className="AdminInput" onChange={(e) => handleChange(e, index)} /></td>
                                     <td><input type='text' value={item.location} name="location" className='AdminInput' onChange={(e) => handleChange(e, index)} /></td>
                                     <td><input type='date' value={item.startDate} name="startDate" className='AdminInput' onChange={(e) => handleChange(e, index)} /></td>
                                     <td><input type='date' value={item.endDate} name="endDate" className='AdminInput' onChange={(e) => handleChange(e, index)} /></td>
@@ -132,10 +132,10 @@ function FutureEvents(props) {
                                     <td>{item.name} {item.surname}</td>
                                     <td>
                                         <Form.Select>
-                                          {item.challenges.map(item2 => (
-                                            <option>{item2.distance + " " + item2.style}</option>
-                                    ))}
-                                    </Form.Select>
+                                            {item.challenges.map(item2 => (
+                                                <option>{item2.distance + " " + item2.style}</option>
+                                            ))}
+                                        </Form.Select>
                                     </td>
                                 </tr>
                             ))}
@@ -195,8 +195,8 @@ function PastEvents(props) {
         setEventUserChallenges(userChallenges);
     }
 
-    
-    const handleChangeChallenge = (e,item) => {
+
+    const handleChangeChallenge = (e, item) => {
         const updateEventUserChallenge = [...eventUsersChallenges];
         updateEventUserChallenge[item].selectedChallenge = e.target.value;
         setEventUserChallenges(updateEventUserChallenge);
@@ -222,8 +222,11 @@ function PastEvents(props) {
                 'Content-Type': 'application/json'
             }
         });
-        if (response.ok)
-            alert("Update Successfully");
+        /* if (response.ok)
+             alert("Update Successfully");
+         */
+        if (!response.ok)
+            alert("Update failed");
     }
 
     const [allUsers, setAllUsers] = useState([]);
@@ -241,30 +244,33 @@ function PastEvents(props) {
         if (response.ok)
             setAllChallenges(data);
     }
-    
-        const addUserChallenge = async () => {
-            const response = await fetch("http://localhost:3001/insertUserChallenge", {
-                method: "post",
-                body: JSON.stringify({
-                    userId: document.getElementById("newUser").value,
-                    challengeId: document.getElementById("newChallenge").value,
-                    eventId: selectedItem.id,
-                    time: document.getElementById("newTime").value
-                }),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            if(response.ok) {
-                document.getElementById("newUser").value = "";
-                document.getElementById("newChallenge").value = "";
-                document.getElementById("newTime").value = "";
-                alert("Insert successfully");
-                getEventUsersChallenges(selectedItem.id);
+
+    const addUserChallenge = async () => {
+        const response = await fetch("http://localhost:3001/insertUserChallenge", {
+            method: "post",
+            body: JSON.stringify({
+                userId: document.getElementById("newUser").value,
+                challengeId: document.getElementById("newChallenge").value,
+                eventId: selectedItem.id,
+                time: document.getElementById("newTime").value
+            }),
+            headers: {
+                'Content-Type': 'application/json'
             }
+        });
+        if (response.ok) {
+            document.getElementById("newUser").value = "";
+            document.getElementById("newChallenge").value = "";
+            document.getElementById("newTime").value = "";
+            //alert("Insert successfully");
+            getEventUsersChallenges(selectedItem.id);
         }
-        
-        const deleteEvent = async (e, index) => {
+    }
+
+    const deleteEvent = async (e, index) => {
+        const confirmed = window.confirm("Sei sicuro di voler eliminare l'evento?");
+
+        if (confirmed) {
             const response = await fetch("http://localhost:3001/deleteEvent", {
                 method: "post",
                 body: JSON.stringify({
@@ -274,34 +280,35 @@ function PastEvents(props) {
                     'Content-type': "application/json",
                 }
             });
-            if (response.ok){
+            if (response.ok) {
                 props.getPastEvents();  //dico al genitore di aggiornare i dati
                 setShow(false);
             }
-        };
+        }
+    };
 
-        const deleteUserChallenge = async (item) => {
-            const response = await fetch("http://localhost:3001/deleteUserChallenge",{
-                method: "post",
-                body: JSON.stringify({
-                    userId: item.id,
-                    eventId: selectedItem.id,
-                    challengeId: item.challenges[item.selectedChallenge].id
-                }),
-                headers: {
-                    'Content-type' : "application/json"
-                }
-            });
-            if(response.ok)
-                 getEventUsersChallenges(selectedItem.id);
-        };
+    const deleteUserChallenge = async (item) => {
+        const response = await fetch("http://localhost:3001/deleteUserChallenge", {
+            method: "post",
+            body: JSON.stringify({
+                userId: item.id,
+                eventId: selectedItem.id,
+                challengeId: item.challenges[item.selectedChallenge].id
+            }),
+            headers: {
+                'Content-type': "application/json"
+            }
+        });
+        if (response.ok)
+            getEventUsersChallenges(selectedItem.id);
+    };
 
     return (
         <>
-            <Card bg = "dark" border='primary'>
+            <Card bg="dark" border='primary'>
                 <Card.Body>
                     <Card.Title className='text-light'>Eventi Passati</Card.Title>
-                    <Form.Select size="lg"  onChange={(e) => handleShow(e)} >
+                    <Form.Select size="lg" onChange={(e) => handleShow(e)} >
                         <option value={'null'}>Open this select menu</option>
                         {pastEvents.map((item, index) => (
                             <>
@@ -318,7 +325,7 @@ function PastEvents(props) {
                     <Modal.Title>{selectedItem.name}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Table striped bordered responsive className='border-dark'> 
+                    <Table striped bordered responsive className='border-dark'>
                         <thead>
                             <tr>
                                 <th>Atleta</th>
@@ -332,7 +339,7 @@ function PastEvents(props) {
                                 <tr>
                                     <td>{item.name} {item.surname}</td>
                                     <td>
-                                        <Form.Select onChange={(e) => handleChangeChallenge(e,index)}>
+                                        <Form.Select onChange={(e) => handleChangeChallenge(e, index)}>
                                             {item.challenges.map((item2, index2) => (
                                                 <>
                                                     <option value={index2}>{item2.distance + " " + item2.style}</option>
@@ -345,7 +352,7 @@ function PastEvents(props) {
                                         <button className='btn btn-primary' onClick={(e) => saveChanges(e, item)}>Modifica</button>
                                     </td>
                                     <td>
-                                        <button className = "btn btn-danger" onClick={() => deleteUserChallenge(item)}>Elimina</button>
+                                        <button className="btn btn-danger" onClick={() => deleteUserChallenge(item)}>Elimina</button>
                                     </td>
 
                                 </tr>
@@ -369,19 +376,19 @@ function PastEvents(props) {
                                 </td>
                                 <td>
                                     <input type="text" placeholder="Tempo in minuti" id="newTime" /> {' '}
-                                    <button className='btn btn-dark' onClick = {addUserChallenge}>Aggiungi</button>
+                                    <button className='btn btn-dark' onClick={addUserChallenge}>Aggiungi</button>
                                 </td>
 
                             </tr>
                         </tbody>
                     </Table>
                 </Modal.Body>
-                <Modal.Footer className = "border-secondary">
+                <Modal.Footer className="border-secondary">
                     <Button variant="dark" onClick={handleClose}>
                         Close
                     </Button>
                     <Button variant="danger" onClick={deleteEvent}>
-                        Elimina
+                        Elimina Evento
                     </Button>
                 </Modal.Footer>
             </Modal>
@@ -421,7 +428,7 @@ function AdminEvents() {
             document.getElementById("newEventLocation").value = "";
             document.getElementById("newEventStartDate").value = "";
             document.getElementById("newEventEndDate").value = "";
-            alert("Insert Successfully");
+            // alert("Insert Successfully");
         }
         else if (response.status == 400)
             alert("Tutti i campi devono essere compilati");
@@ -469,9 +476,9 @@ function AdminEvents() {
                     </Col>
                     <Col xs={12} md={10}>
                         <h1 style={{ textAlign: "center", marginBottom: "20px", color: "white" }}>Gestione Eventi</h1>
-                        <Card bg = "dark" border = "primary">
+                        <Card bg="dark" border="primary">
                             <Card.Body>
-                                <Card.Title className = "text-light">Nuovo Evento</Card.Title>
+                                <Card.Title className="text-light">Nuovo Evento</Card.Title>
                                 <Table responsive variant='dark'>
                                     <thead>
                                         <tr>
@@ -484,10 +491,10 @@ function AdminEvents() {
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><input type='text' id="newEventName" placeholder = "Enter Name" className='AdminInput'/></td>
+                                            <td><input type='text' id="newEventName" placeholder="Enter Name" className='AdminInput' /></td>
                                             <td><input type='text' id="newEventLocation" placeholder='Enter Location' className='AdminInput' /></td>
                                             <td><input type='date' id="newEventStartDate" className='AdminInput' /></td>
-                                            <td><input type='date' id="newEventEndDate" className='AdminInput'/></td>
+                                            <td><input type='date' id="newEventEndDate" className='AdminInput' /></td>
                                             <td>
                                                 <Button variant="primary" onClick={insertEvent}>Aggiungi</Button> {' '}
                                             </td>
@@ -500,7 +507,7 @@ function AdminEvents() {
                         <FutureEvents getFutureEvents={fetchFutureEvents} data={futureEvents} />
                         <div className='mt-5'></div>
                         <PastEvents getPastEvents={getPastEvents} data={pastEvents} />
-                        <div className = "mb-5"></div>
+                        <div className="mb-5"></div>
                     </Col>
                 </Row>
             </div>
