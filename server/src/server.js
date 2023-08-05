@@ -6,6 +6,8 @@ const multer = require("multer");
 const fs = require("fs");
 const path = require("path");
 const CryptoJS = require('crypto-js');
+const dbConfig = require('../db-config');
+
 const app = express();
 
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
@@ -54,10 +56,10 @@ const upload = multer({
 });
 
 const connection = mysql.createConnection({
-   host: 'localhost',
-   user: 'root',
-   password: '',
-   database: 'piscina',
+   host: dbConfig.host,
+   user: dbConfig.user,
+   password: dbConfig.password,
+   database: dbConfig.database,
 });
 
 connection.connect((err) => {
