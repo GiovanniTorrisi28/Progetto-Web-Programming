@@ -30,7 +30,7 @@ Link per node: 'https://nodejs.org/'
 
 ## Utilizzo
 
-1. Avvia il server backend: 'cd server' e 'node server.js'
+1. Avvia il server backend: 'cd server' e 'node src/server.js'
 2. Avvia il frontend: `cd piscina' e 'npm start`
 
 ## Funzionalità Principali
