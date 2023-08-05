@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Table, Card } from 'react-bootstrap';
 import AdminSidebar from './AdminSidebar';
+import '../App.css';
 
 function AdminSubscriptions() {
 
@@ -53,6 +54,11 @@ function AdminSubscriptions() {
 
     const rinnova = async (e, index) => {
         e.preventDefault();
+        if (subscriptionsData[index].endDate == "") {
+            alert("La data inserita non è valida");
+            fetchData();
+            return;
+        }
         const response = await fetch("http://localhost:3001/updateSubscriptionData", {
             method: "POST",
             credentials: 'include',
@@ -130,7 +136,7 @@ function AdminSubscriptions() {
                                                 <td>{item.user_name + " " + item.surname}</td>
                                                 <td>{item.activity_name}</td>
                                                 <td>{item.status ? "Valido" : "Scaduto"}</td>
-                                                <td ><input type="date" value={item.endDate} className = "AdminInput" onChange={(e) => handleChange(e, index)} />{' '}
+                                                <td ><input type="date" value={item.endDate} className = "AdminInput CustomDateInput" onChange={(e) => handleChange(e, index)} />{' '}
                                                      <button className='btn btn-primary' onClick={(e) => rinnova(e, index)}>Rinnova</button></td>
                                                 <td><button className='btn btn-danger' onClick={(e) => deleteSubscription(e, index)}>Elimina</button></td>
                                             </tr>
@@ -153,7 +159,7 @@ function AdminSubscriptions() {
                                                 </select>
                                             </td>
                                             <td><input type="text" disabled style={{ border: "none",background: "rgba(0,0,0,0)" }}></input></td>
-                                            <td><input type="date" name="newDate" id="newEndDate" style={{ border: "none",background: "rgba(0,0,0,0)",color: "white" }}></input></td>
+                                            <td><input type="date" name="newDate" id="newEndDate" className = "CustomDateInput" style={{ border: "none",background: "rgba(0,0,0,0)",color: "white" }}></input></td>
                                             <td><button className='btn btn-light' onClick={addSubscription}>Aggiungi</button></td>
                                         </tr>
                                     </tbody>

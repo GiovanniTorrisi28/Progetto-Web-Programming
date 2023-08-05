@@ -40,11 +40,11 @@ function Staff() {
             <Row>
                {staff.map((item) => (
                   <Col xs={6} md={3}>
-                     <Card bg="light" className=' mb-4 shadow-sm' border="primary" style={{ width: "30vh", margin: "20px 20px 20px 0px" }}>
+                     <Card bg="light" className=' mb-4 shadow-sm StaffCard' border="primary">
                         <Card.Img variant="top" src={item.photo ? item.photo : noPhoto} height={"150px"} />
-                        <Card.Body >
+                        <Card.Body>
                            <Card.Title>{item.name + " " + item.surname}</Card.Title>
-                           <Card.Footer>
+                           <Card.Footer className='border-primary'>
                               <a href={item.instagram} target="blank"> <BsInstagram size="3vh" style={iconsStyle} /> </a>
                               <a href={item.linkedin} target="blank"> <BsLinkedin size="3vh" style={iconsStyle} /> </a>
                            </Card.Footer>

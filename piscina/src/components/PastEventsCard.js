@@ -44,7 +44,7 @@ function PastEventsCard () {
 
     return (
       <>
-        <Card style={{background: "rgba(var(--bs-dark-rgb),0.7)"}}>
+        <Card style={{background: "rgba(var(--bs-dark-rgb))"}} border = "primary">
            <Card.Body>
            <Card.Title>
               <p class="mb-4"><span class="text-light font-italic me-1">Le mie gare passate</span></p>

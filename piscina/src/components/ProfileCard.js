@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import FileUpload from './FileUpload';
 import noPhoto from '../img/noPhoto.jpg';
-import {Card,Image,Row,Col,Container} from 'react-bootstrap';
+import {Card,Image,Row,Col} from 'react-bootstrap';
 
 function ProfileCard(props) {
 
@@ -27,7 +27,7 @@ function ProfileCard(props) {
       }
     
     return (
-        <Card className = "mt-2" style={{background: "rgba(var(--bs-dark-rgb),0.7)",color: "white"}}>
+        <Card className = "mt-2" style={{background: "rgba(var(--bs-dark-rgb))",color: "white"}} border = "primary">
             <Card.Body className="text-center">
                  <Image src={file ? file: noPhoto} 
                    roundedCircle style = {{height: "125px",width: "125px"}}/>
@@ -45,10 +45,6 @@ function ProfileCard(props) {
             </Card.Body>
         </Card>
     );
-}
-
-function uploadPhoto() {
-
 }
 
 export default ProfileCard;

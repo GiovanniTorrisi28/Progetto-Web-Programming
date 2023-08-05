@@ -42,11 +42,6 @@ function PersonalArea() {
     minHeight: "100vh"
   };
 
-  const tabcontentdark  = {
-    color: 'black', /* Imposta il colore del testo attivo su nero */
-    backgroundColor: 'white' /* Imposta lo sfondo attivo su bianco */
-  };
-
   return (
     <div style={backgroundStyle}>
       <Container className="py-5" style={{ height: "100vh" }}>

@@ -20,7 +20,7 @@ function DataCard(){
    }
 
    return (
-      <Card className='mb-4 mt-2' style={{background: "rgba(var(--bs-dark-rgb),0.7)",color: "white"}}>
+      <Card className='mb-4 mt-2' style={{background: "rgba(var(--bs-dark-rgb))",color: "white"}} border = "primary">
          <Card.Body>
              <RecordDataCard label = "Name" valueType = {'text'} value = {userData.name} isEditable = {false}/>
              <RecordDataCard label = "Surname" valueType = {'text'} value = {userData.surname} isEditable = {false}/>

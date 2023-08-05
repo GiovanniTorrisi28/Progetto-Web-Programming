@@ -3,7 +3,7 @@ import '../App.css';
 import TopNavbar from './TopNavbar';
 import Footer from './Footer';
 import noPhoto from '../img/noPhoto.png';
-import { Card, Container, Row, Col } from 'react-bootstrap';
+import { Card, Container, Row, Col, Modal, Button } from 'react-bootstrap';
 
 function Activities() {
    useEffect(() => {
@@ -25,6 +25,16 @@ function Activities() {
       minHeight: "100vh"
    };
 
+   const [show, setShow] = useState(false);
+
+   const [selectedItem, setSelectedItem] = useState({});
+
+   const handleClose = () => setShow(false);
+   const handleShow = (item) => {
+      setSelectedItem(item);
+      setShow(true);
+   }
+
    return (
       <div style={backgroundStyle}>
          <TopNavbar />
@@ -34,10 +44,10 @@ function Activities() {
                {activities.map((item, index) => (
                   <Col md={3} xs={6}>
                      <Card bg="light" className=' mb-4 shadow-sm' border="primary" style={{ width: "30vh", height: "35vh", margin: "20px 20px 20px 0px" }}>
-                        <Card.Img variant="top" src={item.photo ? item.photo : noPhoto} height={"150px"} className='w-100' />
-                        <Card.Body >
+                        <Card.Img variant="top" src={item.photo ? item.photo : noPhoto} className='w-100 h-100' />
+                        <Card.Body>
                            <Card.Title>{item.name}</Card.Title>
-                           <Card.Text>{item.description}</Card.Text>
+                           <Button variant="primary" onClick={() => handleShow(item)}>Scopri di più</Button>
                         </Card.Body>
                      </Card>
                   </Col>
@@ -45,6 +55,21 @@ function Activities() {
             </Row>
          </Container>
          <Footer />
+
+         <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton className="bg-primary text-white">
+               <Modal.Title>{selectedItem.name}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+               {selectedItem.description}
+            </Modal.Body>
+            <Modal.Footer className="border-secondary">
+               <Button variant="dark" onClick={handleClose}>
+                  Close
+               </Button>
+            </Modal.Footer>
+         </Modal>
+
       </div>
    );
 }

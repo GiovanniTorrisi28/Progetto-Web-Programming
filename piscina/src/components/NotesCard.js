@@ -112,7 +112,7 @@ function NotesCard() {
 
     return (
 
-        <Card style={{ background: "rgba(var(--bs-dark-rgb),0.7)" }} className="mt-2">
+        <Card style={{ background: "rgba(var(--bs-dark-rgb))" }} className="mt-2" border = "primary">
             <Card.Body>
                 <Card.Title>
                     <p class="mb-4"><span class="text-light font-italic me-1">Le tue note</span></p>

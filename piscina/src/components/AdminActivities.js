@@ -42,7 +42,7 @@ function AdminActivities() {
                 'Content-type': "application/json",
             },
         });
-        if (response.ok) alert("Update successfully");
+        if (!response.ok) alert("Update failed");
     }
 
     const deleteItem = async (item) => {

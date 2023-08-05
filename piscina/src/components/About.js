@@ -2,15 +2,15 @@ import '../App.css';
 import React from "react";
 import TopNavbar from './TopNavbar';
 import Footer from './Footer';
-import { Container,Row,Col } from 'react-bootstrap';
-import logo from "../img/dolphin.png";
+import { Container, Row, Col } from 'react-bootstrap';
+import photo from "../img/piscina.jpg";
 
 function About() {
 
   const gradientStyle = {
     background: `-webkit-linear-gradient(rgba(135, 60, 255, 1), rgba(135, 60, 255, 0.0) 0%), 
                   -webkit-linear-gradient(-45deg, rgba(120, 155, 255, 0.9) 56%, rgba(55, 230, 235, 0.7) 0%)`,
-                  borderRadius: "15px"
+    borderRadius: "15px"
   };
 
   const backgroundStyle = {
@@ -22,19 +22,34 @@ function About() {
 
   return (
     <div style={backgroundStyle} >
-    <TopNavbar/>
-    <Container  style = {gradientStyle} className = "mt-4">
-      <Row >
-          <Col xs = {12} md = {6}>
-                <h1>About us</h1>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris egestas ligula ac dapibus blandit. Fusce venenatis justo quis neque aliquam sagittis. Nulla volutpat nisl nec neque fermentum suscipit. Aenean tincidunt velit et risus iaculis ornare. Sed cursus suscipit est vel interdum. Pellentesque vestibulum eleifend eros sit amet lacinia. Aliquam in tristique purus, a tristique dolor.
-          </Col>
-          <Col xs = {12} md = {6}>
-            <img alt = "" src = {logo} width = "50%" height = "100%" style = {{float: "right"}}></img>
-        </Col>         
+      <TopNavbar />
+      <Container className="mt-5 about-page-content">
+      <Row>
+        <Col>
+          <h1>About Us</h1>
+          <img src = {photo} alt = "" width = "300px" style={{float: "right"}}></img>
+          <p>
+            Welcome to our website! We are a dedicated team of individuals
+            passionate about delivering high-quality solutions to our clients.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non
+            metus ut dui fringilla laoreet. Vivamus ut maximus lectus.
+          </p>
+          <p>
+            Our mission is to provide innovative and reliable products that
+            meet our clients' needs. We pride ourselves on our attention to
+            detail and commitment to excellence. Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit. Nullam non metus ut dui fringilla
+            laoreet. Vivamus ut maximus lectus.
+          </p>
+          <p>
+            Feel free to explore our website and learn more about our services.
+            If you have any questions or inquiries, please don't hesitate to
+            contact us. We look forward to serving you!
+          </p>
+        </Col>
       </Row>
     </Container>
-    <Footer/>
+      <Footer />
     </div>
   );
 }
